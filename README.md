@@ -116,19 +116,70 @@ Ejecutaremos barrnap para identificar los rRNAs:
 barrnap canu.fasta -o canu.rrna
 barrnap spades.fasta -o spades.rrna
 ```
-Ejecutamos blastp para anotar nuestros genes:
+
+Instalaremos Eggnogmapper en nuestro env:
 ```
-blastp -num_threads 10 -db home/dbs/blast/uniprot_sprot.fasta -num_descriptions 5 -num_alignments 2 -evalue 1e-5 -query canu.faa -out canu.bp
-blastp -num_threads 10 -db home/dbs/blast/uniprot_sprot.fasta -num_descriptions 5 -num_alignments 2 -evalue 1e-5 -query spades.faa -out spades.bp
+conda install -c bioconda eggnog-mapper
+```
+Crearemos la carpeta data en el directorio de nuestro env(reemplazar user)
+```
+mkdir /home/user/anaconda3/envs/cursobio/lib/python3.7/site-packages/data
+```
+Ejecutamos por consola, se aceptan (y) la decarga de las 3 DBs
+```
+download_eggnog_data.py
+```
 
+Ejecutamos Egnogmapper para anotar nuestros genes(en nuestro archivo de jobs (ejemplo_job.sh)):
+```
+emapper.py -i canu.faa -o test --cpu 16                                                                                                  emapper,py -i spades.faa -0 test --cpu 16  
 
 ```
-Script de anotación:
 
 
+Script de análisis de anotación:
+Abrimos en jupyter-notebook el script little_analysis.ipynb y visualizamos la distribucion de GO code terms en nuestros genes
 
 
+## COG one letter code descriptions
+
+INFORMATION STORAGE AND PROCESSING
+
+[J] Translation, ribosomal structure and biogenesis
+
+[A] RNA processing and modification
+
+[K] Transcription
+
+[L] Replication, recombination and repair
+
+[B] Chromatin structure and dynamics
 
 
+CELLULAR PROCESSES AND SIGNALING
+[D] Cell cycle control, cell division, chromosome partitioning
+[Y] Nuclear structure
+[V] Defense mechanisms
+[T] Signal transduction mechanisms
+[M] Cell wall/membrane/envelope biogenesis
+[N] Cell motility
+[Z] Cytoskeleton
+[W] Extracellular structures
+[U] Intracellular trafficking, secretion, and vesicular transport
+[O] Posttranslational modification, protein turnover, chaperones
+
+METABOLISM
+[C] Energy production and conversion
+[G] Carbohydrate transport and metabolism
+[E] Amino acid transport and metabolism
+[F] Nucleotide transport and metabolism
+[H] Coenzyme transport and metabolism
+[I] Lipid transport and metabolism
+[P] Inorganic ion transport and metabolism
+[Q] Secondary metabolites biosynthesis, transport and catabolism
+
+POORLY CHARACTERIZED
+[R] General function prediction only
+[S] Function unknown
 
 
